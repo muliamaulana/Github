@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Github</string>
+
+    <string name="something_went_wrong">Ooops, Something went wrong!</string>
+    <string name="no_connection_message">Please check your internet connection and try again.</string>
+    <string name="timeout_message">Connection Timeout. Please try again.</string>
+    <string name="failed_response_message">Failed to read response!</string>
+    <string name="unauthorized" translatable="false">Unauthorized</string>
+    <string name="not_found">Not found</string>
+    <string name="server_error_message">Internal Server Error</string>
 </resources>
