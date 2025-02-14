@@ -40,6 +40,10 @@ android {
         viewBinding = true
     }
 
+    configurations.all {
+        resolutionStrategy.force("com.squareup.okhttp3:okhttp:4.11.0")
+    }
+
 }
 
 dependencies {
@@ -57,6 +61,7 @@ dependencies {
 
     // retrofit
     implementation(libs.retrofit)
+    implementation(libs.okhttp)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
@@ -64,7 +69,17 @@ dependencies {
     debugImplementation(libs.chucker)
     releaseImplementation(libs.chucker.no.op)
 
+    // testing
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.mockwebserver)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.core.testing)
+
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
 }

@@ -16,6 +16,7 @@ import javax.inject.Singleton
 class GithubRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ) : IGithubRepository {
+
     override fun getListUser(): Flow<Resource<MutableList<ItemListUser>>> {
         return object : NetworkBoundResource<MutableList<ItemListUser>>() {
             override suspend fun createCall(): Flow<ApiResponse<MutableList<ItemListUser>>> {

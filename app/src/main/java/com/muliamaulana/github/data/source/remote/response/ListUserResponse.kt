@@ -2,12 +2,6 @@ package com.muliamaulana.github.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ListUserResponse(
-
-    @field:SerializedName("ListUserResponse")
-    val listUserResponse: List<ItemListUser>? = null
-)
-
 data class ItemListUser(
 
     @field:SerializedName("gists_url")
