@@ -9,6 +9,8 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.10.0"
 constraintlayout = "2.2.0"
+glide = '4.16.0'
+viewmodel = "2.6.2"
 mockito = "4.8.0"
 mockitoKotlin = "4.1.0"
 mockitoInline = "4.8.0"
@@ -25,6 +27,8 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "viewmodel" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 
 # testing
 junit = { group = "junit", name = "junit", version.ref = "junit" }
