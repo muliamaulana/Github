@@ -5,6 +5,7 @@ import com.chuckerteam.chucker.BuildConfig
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.muliamaulana.github.data.source.remote.network.GithubApiService
+import com.muliamaulana.github.data.source.remote.network.RequestInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +27,14 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideOkhttpClient(context: Context): OkHttpClient {
+    fun provideRequestInterceptor(): RequestInterceptor = RequestInterceptor()
+
+    @Singleton
+    @Provides
+    fun provideOkhttpClient(
+        context: Context,
+        requestInterceptor: RequestInterceptor
+    ): OkHttpClient {
         val builder = OkHttpClient.Builder()
 
         val chuckerInterceptor = ChuckerInterceptor.Builder(context)
@@ -43,6 +51,7 @@ class NetworkModule {
             connectTimeout(30, TimeUnit.SECONDS)
             readTimeout(30, TimeUnit.SECONDS)
             addInterceptor(chuckerInterceptor)
+            addInterceptor(requestInterceptor)
         }
 
         return builder.build()

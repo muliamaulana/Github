@@ -11,4 +11,6 @@
     <string name="search">Search</string>
     <string name="something_wrong">Something went wrong!</string>
     <string name="retry">Retry</string>
+    <string name="action_settings">Settings</string>
+    <string name="image_profile">Image Profile</string>
 </resources>

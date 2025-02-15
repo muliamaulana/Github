@@ -19,6 +19,11 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    defaultConfig {
+        val githubToken: String = project.findProperty("GITHUB_TOKEN") as String? ?: ""
+        buildConfigField("String", "GITHUB_TOKEN", githubToken)
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -37,6 +42,7 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
         viewBinding = true
     }
 

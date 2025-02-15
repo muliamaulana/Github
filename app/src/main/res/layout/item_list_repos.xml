@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Repository Name -->
+            <TextView
+                android:id="@+id/tv_repo_name"
+                style="@style/TextAppearance.Material3.TitleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                tools:text="Repository Name" />
+
+            <!-- Programming Languages (Chips) -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_programming"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                tools:text="Kotlin" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- Repository Description -->
+        <TextView
+            android:id="@+id/tv_repo_desc"
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textColor="@android:color/darker_gray"
+            tools:text="Repository description goes here..." />
+
+        <!-- Last Updated -->
+        <TextView
+            android:id="@+id/tv_updated"
+            style="@style/TextAppearance.Material3.TitleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:text="Last updated: 01 Jan 2025" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

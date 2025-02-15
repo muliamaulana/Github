@@ -1,4 +1,4 @@
-package com.muliamaulana.github
+package com.muliamaulana.github.features.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

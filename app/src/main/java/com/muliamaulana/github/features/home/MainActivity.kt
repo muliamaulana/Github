@@ -1,5 +1,6 @@
-package com.muliamaulana.github
+package com.muliamaulana.github.features.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.viewModels
@@ -11,6 +12,7 @@ import com.muliamaulana.github.data.Resource
 import com.muliamaulana.github.data.source.remote.response.ItemListUser
 import com.muliamaulana.github.databinding.ActivityMainBinding
 import com.muliamaulana.github.databinding.ItemListUserBinding
+import com.muliamaulana.github.features.detailuser.DetailUserActivity
 import com.muliamaulana.github.utils.CoreAdapter
 import com.muliamaulana.github.utils.loadImageProfile
 import dagger.hilt.android.AndroidEntryPoint
@@ -81,6 +83,11 @@ class MainActivity : AppCompatActivity() {
             itemBinding.apply {
                 tvUserName.text = dataItem?.login
                 imgProfile.loadImageProfile(dataItem?.avatarUrl)
+                root.setOnClickListener {
+                    val intent = Intent(this@MainActivity, DetailUserActivity::class.java)
+                    intent.putExtra(DetailUserActivity.USERNAME, dataItem?.login)
+                    startActivity(intent)
+                }
             }
         }
 
