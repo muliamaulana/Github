@@ -40,6 +40,11 @@ paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "pag
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+espresso-idling-resource = {module = "androidx.test.espresso:espresso-idling-resource", version.ref = "espressoCore"}
+espresso-intents = {module = "androidx.test.espresso:espresso-intents", version.ref = "espressoCore"}
+espresso-contrib = {module = "androidx.test.espresso:espresso-contrib", version.ref = "espressoCore"}
+uiautomator = { module = "androidx.test.uiautomator:uiautomator", version = "2.3.0" }
+
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
 mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }

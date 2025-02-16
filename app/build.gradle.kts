@@ -89,8 +89,11 @@ dependencies {
     testImplementation(libs.core.testing)
     testImplementation(libs.mockk)
 
-
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.espresso.idling.resource)
+    androidTestImplementation(libs.espresso.intents)
+    androidTestImplementation(libs.espresso.contrib)
+    androidTestImplementation(libs.uiautomator)
 
 }
