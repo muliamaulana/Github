@@ -1,6 +1,8 @@
 package com.muliamaulana.github.data
 
+import com.google.gson.Gson
 import com.muliamaulana.github.data.source.remote.network.ApiResponse
+import com.muliamaulana.github.data.source.remote.response.ApiErrorResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
@@ -26,4 +28,15 @@ abstract class NetworkBoundResource<RESPONSE> {
     fun asFlow(): Flow<Resource<RESPONSE>> = result
 
     protected open fun onFetchFailed() = Unit
+
+    private fun parseErrorResponse(errorBody: String?): ApiErrorResponse {
+        return try {
+            val gson = Gson()
+            errorBody?.let {
+                gson.fromJson(it, ApiErrorResponse::class.java)
+            } ?: ApiErrorResponse("Unknown error", null, 0)
+        } catch (e: Exception) {
+            ApiErrorResponse("Error parsing response", null, 0)
+        }
+    }
 }

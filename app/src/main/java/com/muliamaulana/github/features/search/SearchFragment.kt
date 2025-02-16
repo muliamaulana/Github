@@ -95,6 +95,10 @@ class SearchFragment : Fragment() {
                 layoutError.root.isVisible = loadStates.source.refresh is LoadState.Error
                 binding.progressBarSearch.isVisible = loadStates.source.refresh is LoadState.Loading
 
+                if (loadStates.source.refresh is LoadState.NotLoading) {
+                    binding.rvSearch.isVisible = true
+                }
+
                 if (loadStates.source.refresh is LoadState.Error) {
                     layoutError.root.isVisible = true
                     binding.rvSearch.isVisible = false
