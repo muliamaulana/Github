@@ -3,16 +3,20 @@ package com.muliamaulana.github.features.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.muliamaulana.github.R
 import com.muliamaulana.github.data.Resource
 import com.muliamaulana.github.data.source.remote.response.ItemListUser
 import com.muliamaulana.github.databinding.ActivityMainBinding
 import com.muliamaulana.github.databinding.ItemListUserBinding
 import com.muliamaulana.github.features.detailuser.DetailUserActivity
+import com.muliamaulana.github.features.search.SearchFragment
 import com.muliamaulana.github.utils.CoreAdapter
 import com.muliamaulana.github.utils.loadImageProfile
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +34,32 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        setUpSearch()
         setUpObserver()
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.searchView.hasFocus()) {
+                    closeSearch()
+                    return
+                }
+                
+                if (binding.rvUser.isVisible) {
+                    finish()
+                    return
+                }
+
+                if (!binding.searchView.hasFocus()) {
+                    binding.searchView.apply {
+                        setQuery("", false)
+                    }
+                    closeSearch()
+                    return
+                }
+
+                finish()
+            }
+        })
 
         if (viewModel.listUser.value.isNullOrEmpty()) {
             fetchData()
@@ -39,6 +68,28 @@ class MainActivity : AppCompatActivity() {
 
         updateUI()
 
+    }
+
+    private fun setUpSearch() {
+        binding.searchView.apply {
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    viewModel.updateQuerySearch(query)
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    viewModel.updateQuerySearch(newText)
+                    return true
+                }
+            })
+
+            setOnQueryTextFocusChangeListener { _, hasFocus ->
+                if (hasFocus || binding.searchView.query.isNotEmpty()) {
+                    openSearch()
+                } else closeSearch()
+            }
+        }
     }
 
     private fun fetchData() {
@@ -99,11 +150,34 @@ class MainActivity : AppCompatActivity() {
         val data = viewModel.listUser.value
         adapter.submitData(data)
         with(binding) {
+            rvUser.isVisible = true
             progressBar.isVisible = false
             rvUser.adapter = adapter
             rvUser.layoutManager = LinearLayoutManager(this@MainActivity)
         }
 
+    }
+
+    private fun openSearch() {
+        binding.rvUser.isVisible = false
+        binding.layoutError.root.isVisible = false
+        binding.progressBar.isVisible = false
+
+        val fragmentManager = supportFragmentManager
+        val existingFragment = fragmentManager.findFragmentById(R.id.fragment_container)
+
+        if (existingFragment == null) { // Check if fragment is already present
+            fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, SearchFragment())
+                .commit()
+        }
+    }
+
+    private fun closeSearch() {
+        supportFragmentManager.findFragmentById(R.id.fragment_container)?.let {
+            supportFragmentManager.beginTransaction().remove(it).commit()
+        }
+        fetchData()
     }
 
 }

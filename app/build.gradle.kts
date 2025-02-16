@@ -58,9 +58,11 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
+    implementation(libs.androidx.fragment)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.glide)
+    implementation(libs.paging.runtime)
 
     // hilt
     implementation(libs.hilt.android)

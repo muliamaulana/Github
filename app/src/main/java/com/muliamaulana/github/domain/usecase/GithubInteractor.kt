@@ -1,5 +1,6 @@
 package com.muliamaulana.github.domain.usecase
 
+import androidx.paging.PagingData
 import com.muliamaulana.github.data.Resource
 import com.muliamaulana.github.data.source.remote.response.DetailUserResponse
 import com.muliamaulana.github.data.source.remote.response.ItemListUser
@@ -25,6 +26,10 @@ class GithubInteractor @Inject constructor(private val repository: IGithubReposi
 
     override fun getRepos(username: String?): Flow<Resource<MutableList<ItemRepos>>> {
         return repository.getUserRepos(username)
+    }
+
+    override fun searchUser(query: String?): Flow<PagingData<ItemListUser>> {
+        return repository.searchUser(query)
     }
 
 }

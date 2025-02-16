@@ -7,7 +7,6 @@ import com.muliamaulana.github.data.source.remote.response.DetailUserResponse
 import com.muliamaulana.github.data.source.remote.response.ItemRepos
 import com.muliamaulana.github.domain.usecase.GithubUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest

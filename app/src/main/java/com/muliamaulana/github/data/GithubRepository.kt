@@ -1,12 +1,19 @@
 package com.muliamaulana.github.data
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.muliamaulana.github.data.source.remote.RemoteDataSource
 import com.muliamaulana.github.data.source.remote.network.ApiResponse
+import com.muliamaulana.github.data.source.remote.pagingsource.SearchPagingSource
 import com.muliamaulana.github.data.source.remote.response.DetailUserResponse
 import com.muliamaulana.github.data.source.remote.response.ItemListUser
 import com.muliamaulana.github.data.source.remote.response.ItemRepos
 import com.muliamaulana.github.domain.repository.IGithubRepository
+import com.muliamaulana.github.utils.ExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,6 +23,7 @@ import javax.inject.Singleton
 
 @Singleton
 class GithubRepository @Inject constructor(
+    private val exceptionHandler: ExceptionHandler,
     private val remoteDataSource: RemoteDataSource
 ) : IGithubRepository {
 
@@ -41,5 +49,17 @@ class GithubRepository @Inject constructor(
                 return remoteDataSource.getUserRepos(username)
             }
         }.asFlow()
+    }
+
+    override fun searchUser(query: String?): Flow<PagingData<ItemListUser>> {
+        return Pager(
+            config = PagingConfig(pageSize = 10, enablePlaceholders = false),
+            pagingSourceFactory = {
+                SearchPagingSource(
+                    remoteDataSource,
+                    query = query
+                )
+            }
+        ).flow.flowOn(Dispatchers.IO)
     }
 }

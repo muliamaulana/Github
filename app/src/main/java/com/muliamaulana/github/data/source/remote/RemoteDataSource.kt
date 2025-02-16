@@ -5,6 +5,7 @@ import com.muliamaulana.github.data.source.remote.network.GithubApiService
 import com.muliamaulana.github.data.source.remote.response.DetailUserResponse
 import com.muliamaulana.github.data.source.remote.response.ItemListUser
 import com.muliamaulana.github.data.source.remote.response.ItemRepos
+import com.muliamaulana.github.data.source.remote.response.SearchUserResponse
 import com.muliamaulana.github.utils.ExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -38,7 +39,7 @@ class RemoteDataSource @Inject constructor(
                     emit(ApiResponse.Empty)
                     return@flow
                 }
-                emit(ApiResponse.Empty)
+                emit(ApiResponse.Error(response.message()))
                 return@flow
             } catch (e: Exception) {
                 emit(ApiResponse.Error(exceptionHandler.handler(e)))
@@ -59,7 +60,7 @@ class RemoteDataSource @Inject constructor(
                     emit(ApiResponse.Empty)
                     return@flow
                 }
-                emit(ApiResponse.Empty)
+                emit(ApiResponse.Error(response.message()))
                 return@flow
             } catch (e: Exception) {
                 emit(ApiResponse.Error(exceptionHandler.handler(e)))
@@ -77,12 +78,30 @@ class RemoteDataSource @Inject constructor(
                         emit(ApiResponse.Success(body))
                         return@flow
                     }
+                    emit(ApiResponse.Empty)
+                    return@flow
                 }
-                emit(ApiResponse.Empty)
+                emit(ApiResponse.Error(response.message()))
                 return@flow
             } catch (e: Exception) {
                 emit(ApiResponse.Error(exceptionHandler.handler(e)))
             }
         }.flowOn(dispatcherIo)
+    }
+
+    suspend fun searchUser(query: String?, page: Int?): ApiResponse<SearchUserResponse> {
+        try {
+            val response = apiService.searchUser(query, page)
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body != null) {
+                    return ApiResponse.Success(body)
+                }
+                return ApiResponse.Empty
+            }
+            return ApiResponse.Error(response.message())
+        } catch (e: Exception) {
+            return ApiResponse.Error(exceptionHandler.handler(e))
+        }
     }
 }
