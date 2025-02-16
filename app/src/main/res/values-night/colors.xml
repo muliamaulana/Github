@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Mode Colors (Pastel) -->
+    <color name="pastel_primary">#9575CD</color> <!-- Dim Lavender -->
+    <color name="pastel_secondary">#64B5F6</color> <!-- Dim Sky Blue -->
+    <color name="pastel_tertiary">#81C784</color> <!-- Dim Soft Green -->
+    <color name="pastel_background">#212121</color> <!-- Dark Gray -->
+    <color name="pastel_surface">#37474F</color> <!-- Dark Blue Gray -->
+    <color name="pastel_onPrimary">#FFFFFF</color>
+    <color name="pastel_onSecondary">#FFFFFF</color>
+    <color name="pastel_onBackground">#FFFFFF</color>
+    <color name="pastel_onSurface">#FFFFFF</color>
+</resources>

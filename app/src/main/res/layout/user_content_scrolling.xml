@@ -173,6 +173,15 @@
             android:layout_gravity="center"
             android:visibility="gone" />
 
+        <TextView
+            android:id="@+id/tv_empty_repos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:visibility="gone"
+            tools:text="muliamaulana doesn't have any public repositories yet."
+            tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_repos"

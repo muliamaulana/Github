@@ -5,7 +5,20 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Github" parent="Base.Theme.Github" />
+    <style name="Theme.Github" parent="Base.Theme.Github" >
+        <!-- Primary Colors -->
+        <item name="colorPrimary">@color/pastel_primary</item>
+        <item name="colorSecondary">@color/pastel_secondary</item>
+        <item name="colorTertiary">@color/pastel_tertiary</item>
+
+        <!-- Background & Surface -->
+        <item name="android:colorBackground">@color/pastel_background</item>
+        <item name="colorSurface">@color/pastel_surface</item>
+
+        <!-- Text Colors -->
+        <item name="android:textColorPrimary">@color/pastel_onBackground</item>
+        <item name="android:textColorSecondary">@color/pastel_onSurface</item>
+    </style>
 
     <style name="Theme.Github.NoActionBar">
         <item name="windowActionBar">false</item>

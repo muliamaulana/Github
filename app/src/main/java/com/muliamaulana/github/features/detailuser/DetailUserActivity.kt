@@ -146,7 +146,15 @@ class DetailUserActivity : AppCompatActivity() {
         setUpAdapter()
         binding.layoutContent.root.isVisible = true
         val data = viewModel.dataRepos.value
-
+        if (data.isNullOrEmpty()) {
+            val message = "${viewModel.username.value} ${getString(R.string.no_repos)}"
+            binding.layoutContent.rvRepos.isVisible = false
+            binding.layoutContent.tvEmptyRepos.apply {
+                isVisible = true
+                text = message
+            }
+            return
+        }
         adapter.submitData(data)
         with(binding.layoutContent.rvRepos) {
             isVisible = true
