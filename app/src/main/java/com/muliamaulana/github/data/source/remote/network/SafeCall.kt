@@ -9,7 +9,7 @@ import javax.inject.Singleton
  * Created by muliamaulana on 16/02/25.
  */
 @Singleton
-class SafeApiCall @Inject constructor(
+open class SafeApiCall @Inject constructor(
     private val exceptionHandler: ExceptionHandler
 ) {
 

@@ -23,7 +23,6 @@ import javax.inject.Singleton
 
 @Singleton
 class GithubRepository @Inject constructor(
-    private val exceptionHandler: ExceptionHandler,
     private val remoteDataSource: RemoteDataSource
 ) : IGithubRepository {
 

@@ -29,14 +29,4 @@ abstract class NetworkBoundResource<RESPONSE> {
 
     protected open fun onFetchFailed() = Unit
 
-    private fun parseErrorResponse(errorBody: String?): ApiErrorResponse {
-        return try {
-            val gson = Gson()
-            errorBody?.let {
-                gson.fromJson(it, ApiErrorResponse::class.java)
-            } ?: ApiErrorResponse("Unknown error", null, 0)
-        } catch (e: Exception) {
-            ApiErrorResponse("Error parsing response", null, 0)
-        }
-    }
 }

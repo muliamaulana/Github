@@ -17,11 +17,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
 
-    defaultConfig {
         val githubToken: String = project.findProperty("GITHUB_TOKEN") as String? ?: ""
         buildConfigField("String", "GITHUB_TOKEN", githubToken)
+
     }
 
     buildTypes {
@@ -81,12 +80,14 @@ dependencies {
 
     // testing
     testImplementation(libs.junit)
+    testImplementation(libs.androidx.junit.ktx)
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.mockito.inline)
     testImplementation(libs.mockwebserver)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.core.testing)
+    testImplementation(libs.mockk)
 
 
     androidTestImplementation(libs.androidx.junit)
